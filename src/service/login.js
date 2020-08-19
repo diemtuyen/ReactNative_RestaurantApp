@@ -1,12 +1,20 @@
 import request from './request';
-import { LOGIN_URL, REGISTER_URL } from './api_constants';
+import axios from 'axios';
+import { API_BASE, LOGIN_URL, REGISTER_URL } from './api_constants';
 
-function doLogin(email, password) {
-  const data = {
-    email,
-    password,
+function doLogin(username, password) {
+  let params = {
+    'username': username,
+    'password': password,
+    'grant_type': 'password',
+    'client_id': 'mobile'
   };
-  return request({ url: LOGIN_URL, method: 'POST', data });
+  const searchParams = Object.keys(params).map((key) => {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+  }).join('&');
+  // return request({ url: LOGIN_URL, method: 'POST', searchParams });
+  let url = API_BASE + LOGIN_URL
+  return axios.post(url, searchParams);
 }
 
 function doRegister(email, password) {

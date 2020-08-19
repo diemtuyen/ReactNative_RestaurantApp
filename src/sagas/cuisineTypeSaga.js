@@ -2,7 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import API from '../service/food';
 
 
-const authTokenSelector = state => state.auth.loginMessage.token;
+const authTokenSelector = state => state.auth.loginMessage.access_token;
 
 function* cuisineTypeTask(action) {
   try {

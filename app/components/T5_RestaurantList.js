@@ -5,7 +5,7 @@ import { FlatList, Image, View } from 'react-native';
 
 import startCase from 'lodash/startCase';
 import { Actions } from 'react-native-router-flux';
-import RestaurantItem from './RestaurantItem';
+import RestaurantItem from './T5_RestaurantItem';
 import Assets from '../../src/constants/assets';
 import ViewRow from '../base_components/ViewRow';
 import PrimaryText from '../base_components/PrimaryText';
@@ -13,16 +13,12 @@ import RippleIcon from '../base_components/RippleIcon';
 import BR from '../base_components/BR';
 
 class RestaurantList extends Component {
-  handleFilter = (type) => {
-    this.props.handleFilter(type);
-  };
-
   renderHeader = () => (
     <ViewRow
       jc="space-between"
       ai="center"
       style={{
-        padding: 20,
+        padding: 5,
       }}
     >
       <PrimaryText
@@ -32,27 +28,15 @@ class RestaurantList extends Component {
           flex: 1,
         }}
       >
-        Restaurants
-      </PrimaryText>
-      {
-        !this.props.hideFilter &&
-        <RippleIcon
-          style={{
-            flex: 0,
-          }}
-          dark
-          onPress={this.props.onFilterIconPress}
-          name="md-funnel"
-          size={30}
-        />
-      }
+        Danh sách bàn
+      </PrimaryText>      
     </ViewRow>);
 
   renderEmptySection = () => {
     if (!this.props.restaurantList || this.props.restaurantList.length === 0) {
       return (
         <View>
-          {/* {this.renderHeader()} */}
+          {this.renderHeader()}
           <View
             style={{
               backgroundColor: '#fdfdfd',
@@ -61,21 +45,9 @@ class RestaurantList extends Component {
               padding: 20,
               flexDirection: 'column',
             }}
-          >
-            <Image
-              source={Assets.Images.banana}
-              style={{
-                width: 150,
-                height: 150,
-              }}
-            />
-            <BR />
+          > 
             <PrimaryText>
-              {'We couldn\'t find anything.'}
-            </PrimaryText>
-            <BR />
-            <PrimaryText>
-              Please try again...
+              No item ...
             </PrimaryText>
           </View>
         </View>
@@ -84,19 +56,29 @@ class RestaurantList extends Component {
     return null;
   };
 
-  renderRestaurantSection = () => (
-    (this.props.restaurantList && this.props.restaurantList.length > 0)
-      ?
-        <FlatList
-          data={this.props.restaurantList}
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-          // ListHeaderComponent={this.renderHeader}
-          renderItem={this.renderRestaurantList}
-          keyExtractor={item => item._id}
-        />
-      : this.renderEmptySection()
-  );
+  renderRestaurantSection = () => {
+    return (
+      <View
+        style={{
+          width: '100%',
+          flex: 1,
+          flexDirection: 'row'
+        }}
+      >
+      {(this.props.restaurantList && this.props.restaurantList.length > 0)
+        ?
+          <FlatList
+            data={this.props.restaurantList}
+            showsHorizontalScrollIndicator={false}
+            bounces={false}
+            ListHeaderComponent={this.renderHeader}
+            renderItem={this.renderRestaurantList}
+            keyExtractor={item => item._id}
+          />
+        : this.renderEmptySection()}
+        </View>    
+    )
+  };
 
 
   renderRestaurantList = ({ item: restaurant }) => {
@@ -105,7 +87,7 @@ class RestaurantList extends Component {
         <RestaurantItem
           restaurant={restaurant}
           onPress={() => Actions.restaurantScreen({
-            title: startCase(restaurant.name),
+            title: startCase(`Bàn ${restaurant._id}`),
             backTitle: 'Back',
             rightTitle: 'Sign Out',
             onRight: () => this.handleSignOut(),
@@ -124,20 +106,12 @@ class RestaurantList extends Component {
   }
 }
 
-RestaurantList.defaultProps = {
-  handleFilter: () => {
-  },
-  onFilterIconPress: () => {
-  },
-  hideFilter: false,
+RestaurantList.defaultProps = { 
 };
 
 
 RestaurantList.propTypes = {
-  hideFilter: PropTypes.bool,
   restaurantList: PropTypes.array.isRequired,
-  handleFilter: PropTypes.func,
-  onFilterIconPress: PropTypes.func,
 };
 
 export default RestaurantList;

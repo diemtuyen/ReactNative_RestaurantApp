@@ -1,7 +1,7 @@
-export const authLogin = (email, password) => ({
+export const authLogin = (username, password) => ({
   type: 'AUTH_LOGIN',
   payload: {
-    email,
+    username,
     password,
   },
 });

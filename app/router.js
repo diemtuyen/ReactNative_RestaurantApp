@@ -4,9 +4,11 @@ import { Drawer, Router, Scene } from 'react-native-router-flux';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
+import T5_HomeScreen from './screens/T5_HomeScreen';
 import Colors from '../src/constants/colors';
 import SignupScreen from './screens/SignupScreen';
 import RestaurantInfoScreen from './screens/RestaurantInfoScreen';
+import MenuScreen from './components/T5_MenuList';
 import CuisineRestaurantsScreen from './screens/CuisineRestaurantsScreen';
 import CartScreen from './screens/CartScreen';
 import PaymentHome from './screens/Payment/Home';
@@ -15,7 +17,6 @@ import PaymentFailed from './screens/Payment/Failed';
 import SideDrawer from './screens/SideDrawer';
 import DrawerImage from './components/DrawerImage';
 import OrdersList from './screens/OrderListScreen';
-
 
 const AppRouter = () => (
   <Router>
@@ -44,6 +45,7 @@ const AppRouter = () => (
           <Scene
             key="homeScreen"
             component={HomeScreen}
+            // component={T5_HomeScreen}
             title="Restaurant App"
             titleStyle={{
               fontFamily: 'Roboto Slab',
@@ -63,6 +65,11 @@ const AppRouter = () => (
           <Scene
             key="restaurantScreen"
             component={RestaurantInfoScreen}
+          />
+
+          <Scene
+            key="menuScreen"
+            component={MenuScreen}
           />
 
           <Scene

@@ -11,8 +11,7 @@ function* loginTask(action) {
     });
     const { payload } = action;
 
-    const res = yield call(Auth.doLogin, payload.email, payload.password);
-
+    const res = yield call(Auth.doLogin, payload.username, payload.password);
     if (res.status === 200) {
       yield put({
         type: 'AUTH_LOGIN_SUCCESS',

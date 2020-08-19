@@ -5,7 +5,6 @@ function* cartItemsFetch(action) {
   yield put({
     type: 'IN_PROGRESS',
   });
-
   try {
     const response = yield call(storage.getItem, 'userCart');
     yield put({
@@ -16,9 +15,10 @@ function* cartItemsFetch(action) {
     console.log(e);
     yield put({
       type: 'SAVE_NEW_CART',
-      payload: {
-        cartData: [],
-      },
+      payload: JSON.parse(response) || [],
+      // payload: {
+      //   cartData: [],
+      // },
     });
   }
 }

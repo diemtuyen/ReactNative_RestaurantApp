@@ -16,32 +16,29 @@ import BR from '../base_components/BR';
 import { updateCartItems } from '../../src/actions/cart';
 import SignOutButton from '../components/RightHeaderButtons';
 
-class RestaurantInfoScreen extends Component {
+class MenuScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerRight: <SignOutButton />,
   });
 
-  componentDidMount() {
-    this.props.fetchRestaurant();
-  }
-
-  renderFoodList = (foods, details) => (
+  
+  renderFoodList = foods => (
     <FlatList
       data={foods}
       bounces={false}
-      ListHeaderComponent={this.renderHeader(details)}
+      ListHeaderComponent={this.renderHeader}
       keyExtractor={item => item._id}
       renderItem={this.renderFoodItem}
     />
   );
 
-  renderHeader = (details) => (
+  renderHeader = () => (
     <ViewRow
       jc="space-between"
       style={{
         backgroundColor: '#fff',
         borderColor: '#eee',
-        padding: 10,
+        padding: 20,
         borderBottomWidth: 1,
         marginTop: 2,
       }}
@@ -52,7 +49,7 @@ class RestaurantInfoScreen extends Component {
         }}
         size={20}
       >
-        {details}
+        Menu
       </PrimaryText>
     </ViewRow>
   );
@@ -79,7 +76,7 @@ class RestaurantInfoScreen extends Component {
         }}
       >
         <ScrollView>
-          {/* <Image
+          <Image
             source={Assets.Images.placeholderRestaurant}
             style={{
               width: '100%',
@@ -96,17 +93,17 @@ class RestaurantInfoScreen extends Component {
             <PrimaryText align="left" size={24}>{restaurantName}</PrimaryText>
             <BR size={5} />
             <SecondaryText align="left" size={16}>{details}</SecondaryText>
-          </View> */}
-          {this.renderFoodList(foods, details)}
+          </View>
+          {this.renderFoodList(foods)}
         </ScrollView>
       </AppBase>
     );
   }
 }
 
-RestaurantInfoScreen.defaultProps = {};
+MenuScreen.defaultProps = {};
 
-RestaurantInfoScreen.propTypes = {
+MenuScreen.propTypes = {
   fetchRestaurant: PropTypes.func.isRequired,
   updateCartItems: PropTypes.func.isRequired,
   // authLogout: PropTypes.func.isRequired,
@@ -127,4 +124,4 @@ function initMapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-export default connect(initMapStateToProps, initMapDispatchToProps)(RestaurantInfoScreen);
+export default connect(initMapStateToProps, initMapDispatchToProps)(MenuScreen);

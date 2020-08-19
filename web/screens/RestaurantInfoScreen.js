@@ -66,7 +66,11 @@ const getRestaurant = state => state.restaurant.fullList;
 
 const findRestaurant = createSelector(
   [getRestaurant],
-  fullList => restaId => fullList.filter(restaurant => (restaId === restaurant._id)),
+  fullList => restaId => {
+    console.log('findRestaurant fullList' + fullList)
+    console.log('findRestaurant restaId' + restaId)
+    return fullList.filter(restaurant => (restaId === restaurant._id))
+  },
 );
 
 const mapStateToProps = state => ({

@@ -52,14 +52,14 @@ class BillReceipt extends React.Component {
             this.props.billInfo.map(item => (
               <BillRow key={item.name}>
                 <div>{item.name}</div>
-                <div>{`₹ ${item.total}`}</div>
+                <div>{`${item.total} đ`}</div>
               </BillRow>
             ))
           }
             <HorizontalLine />
             <BillRow>
               <div>Total Pay</div>
-              <div>{parseFloat(this.props.total).toFixed(2)} ₹</div>
+              <div>{parseFloat(this.props.total).toFixed(2)} &#8363;</div>
             </BillRow>
           </Container>
         </MainContainer>

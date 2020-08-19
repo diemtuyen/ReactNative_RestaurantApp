@@ -99,7 +99,6 @@ class CartDetails extends React.Component {
 
   handlePayment = (totalAmount) => {
     const { cartData } = this.props;
-
     if (cartData.length > 0) {
       const postData = cartData.map(item => ({
         id: item.food._id,

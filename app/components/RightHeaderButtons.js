@@ -13,7 +13,7 @@ import PrimaryText from '../base_components/PrimaryText';
 class RightHeaderButtons extends Component {
   componentWillReceiveProps(nexProps, nextContext) {
     const { loginMessage } = nexProps;
-    if (!loginMessage || !loginMessage.token) {
+    if (!loginMessage || !loginMessage.access_token) {
       Actions.reset('loginScreen');
     }
   }
@@ -27,7 +27,7 @@ class RightHeaderButtons extends Component {
   render() {
     const { loginMessage } = this.props;
 
-    if (loginMessage === null || !loginMessage.token) {
+    if (loginMessage === null || !loginMessage.access_token) {
       return null;
     }
     return (

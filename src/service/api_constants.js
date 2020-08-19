@@ -1,6 +1,6 @@
-export const API_BASE = 'http://localhost:3000';
+export const API_BASE = 'http://103.48.190.9:8102';
 
-export const LOGIN_URL = '/auth/login';
+export const LOGIN_URL = '/token';
 export const REGISTER_URL = '/auth/register';
 export const RESTAURANT_URL = '/restaurant';
 export const RESTAURANT_FILTER_URL = '/restaurant/filter';

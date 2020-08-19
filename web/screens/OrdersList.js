@@ -38,14 +38,19 @@ class OrdersList extends React.Component {
   componentWillMount() {
     this.props.fetchOrders();
   }
-   mapItems = items => items.map(item => (
+   mapItems = items => {
+     console.log(items)
+     items.map(item => (
+     console.log(item),
      <CardContent key={item.id}>
-       <div>
-         <Typography>{`ItemId: ${item.id}`}</Typography>
-         <Typography>{`Rs. ${item.price}`}</Typography>
-       </div>
-     </CardContent>
-   ))
+        <div>
+          <Typography>{`ItemId: ${item.id}`}</Typography>
+          <Typography>{`Rs. ${item.price}`}</Typography>
+        </div>
+      </CardContent>
+    ))
+   }
+   
 
   showAllOrders = () => {
     const { orders } = this.props.ordersList;

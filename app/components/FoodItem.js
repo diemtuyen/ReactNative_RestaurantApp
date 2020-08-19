@@ -26,7 +26,7 @@ class FoodItem extends React.Component {
           key={food._id}
           style={{
             elevation: 3,
-            minHeight: 220,
+            minHeight: 150,
             backgroundColor: '#fff',
             margin: 10,
             borderRadius: 5,
@@ -41,7 +41,7 @@ class FoodItem extends React.Component {
             source={Assets.Images.placeholderFood}
             style={{
               width: '100%',
-              height: 150,
+              height: 100,
             }}
             resizeMode="contain"
           />
@@ -49,7 +49,8 @@ class FoodItem extends React.Component {
             jc="space-between"
             ai="flex-start"
             style={{
-              padding: 15,
+              paddingHorizontal: 15,
+              paddingVertical: 0 
             }}
           >
             <View
@@ -71,7 +72,7 @@ class FoodItem extends React.Component {
               }}
             >
               <PrimaryText size={20} color={Colors.moneyColor}>
-                &#8377; {food.price}
+                {food.price} &#8363;
               </PrimaryText>
             </View>
           </ViewRow>

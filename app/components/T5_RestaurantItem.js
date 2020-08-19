@@ -4,7 +4,6 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Assets from '../../src/constants/assets';
-import PrimaryText from '../base_components/PrimaryText';
 import SecondaryText from '../base_components/SecondaryText';
 
 const RestaurantItem = ({ restaurant, onPress }) => (
@@ -16,37 +15,34 @@ const RestaurantItem = ({ restaurant, onPress }) => (
       key={restaurant._id}
       style={{
         width: '100%',
-        minHeight: 180,
+        minHeight: 120,
         backgroundColor: '#fff',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        marginBottom: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#eee',
+        marginBottom: 30,
+        borderWidth: 1,
+        borderColor: '#eee',
       }}
-    >      
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column'
-        }}
-      >
-        <PrimaryText size={20} align="left" style={{ marginBottom: 0 }}>
-          {restaurant.name}
-        </PrimaryText>
-        {/* <SecondaryText>
-          {restaurant.details}
-        </SecondaryText> */}
-      </View>
+    >
       <Image
         source={Assets.Images.placeholderRestaurant}
         style={{
           width: '100%',
-          height: 150,
-          marginBottom: 30,
+          height: 100,
         }}
         resizeMode="contain"
       />
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          padding: 5,
+        }}
+      >
+        <SecondaryText size={16} align="center" style={{ marginBottom: 5 }}>
+          {`Bàn số ${restaurant._id}`}
+        </SecondaryText>
+      </View>
     </View>
   </TouchableOpacity>
 );

@@ -90,7 +90,7 @@ class CartScreen extends Component {
     <Item
       key={item._id}
       name={item.food.name}
-      price={`₹${item.price * item.qty}`}
+      price={`${item.price * item.qty} đ`}
       qty={item.qty}
       onChange={qty => this.handleItemValueChange(item, qty)}
     />
@@ -145,7 +145,7 @@ class CartScreen extends Component {
       return (
         <FooterContainer>
           <AmountContainer>
-            <PrimaryText>₹ {totalAmount}</PrimaryText>
+            <PrimaryText>{totalAmount} &#8363;</PrimaryText>
           </AmountContainer>
           <PayButton
             onPress={() => this.handlePayment(totalAmount)}

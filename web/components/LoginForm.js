@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
+      username: '',
       password: '',
     };
   }
@@ -74,12 +74,12 @@ class LoginForm extends React.Component {
   }
 
   login = () => {
-    this.props.authLogin(this.state.email, this.state.password);
+    this.props.authLogin(this.state.username, this.state.password);
   }
 
   render() {
-    const { email, password } = this.state;
-    const disableLogin = (!email || email.length === 0 || !password || password.length === 0);
+    const { username, password } = this.state;
+    const disableLogin = (!username || username.length === 0 || !password || password.length === 0);
     const { classes } = this.props;
     if (this.props.loginLoading) { return <Loader />; }
 
@@ -101,7 +101,7 @@ class LoginForm extends React.Component {
               shrink: true,
               className: classes.bootstrapFormLabel,
             }}
-            onChange={event => this.setState({ email: event.target.value })}
+            onChange={event => this.setState({ username: event.target.value })}
           />
           <TextField
             label="Password"

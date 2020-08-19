@@ -96,7 +96,7 @@ class PaymentComplete extends Component {
             justifyContent: 'center',
           }}
         >
-          <Currency>₹</Currency>
+          <Currency>&#8363;</Currency>
           <PriceText>{rupee}<CentText>.{paise}</CentText></PriceText>
         </View>
 
