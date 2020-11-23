@@ -17,11 +17,17 @@ export default (state = initialState, { type, payload }) => {
         // ordersList: null,
         // ordersListError: payload,
         ordersList: {
-          orders: [
-            {_id: 1, totalCost: 100, items: [
+          items: [
+            {_id: 1, table: 1, total: 112, items: [
               [
-                {id: 10, price: 120}, 
-                {id: 15, price: 150}]
+                {id: 1, name: 'Bún xương', price: 28, quantity: 2}, 
+                {id: 2, name: 'Bún tái', price: 28, quantity: 1}]
+              ]
+            },
+            {_id: 2, table: 2, total: 84, items: [
+              [
+                {id: 1, name: 'Bún thập cẩm', price: 28, quantity: 1}, 
+                {id: 2, name: 'Bún tái', price: 28, quantity: 1}]
               ]
             }
           ]
@@ -34,9 +40,12 @@ export default (state = initialState, { type, payload }) => {
         createdOrderError: null,
       };
     case 'CREATE_ORDER_ERROR':
+    const orders = payload
       return {
         // createdOrder: null,
-        createdOrder: { username: 'it1', totalCost: 180, _id: 1},
+        // createdOrder: { username: 'it1', totalCost: 180, _id: 1},
+        createdOrder: payload,
+        ordersList: orders,
         // createdOrderError: payload,
         createdOrderError: null,
       };

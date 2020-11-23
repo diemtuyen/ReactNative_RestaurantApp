@@ -1,9 +1,10 @@
 /* eslint-disable react/forbid-prop-types,react/require-default-props */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import TearLines from 'react-native-tear-lines';
+import Color from '../../../src/constants/colors';
 
 const Container = styled.View`
   background-color: white;
@@ -28,6 +29,12 @@ const HorizontalLine = styled.View`
   border-color: #d9d9d9;
 `;
 
+const styles = StyleSheet.create({
+  textNote: {
+    color: Color.primaryColor,
+    fontSize: 16,
+  },
+});
 
 class BillReceipt extends Component {
   render() {
@@ -55,8 +62,8 @@ class BillReceipt extends Component {
           }
           <HorizontalLine />
           <BillRow>
-            <Text>Total Pay</Text>
-            <Text>{parseFloat(total).toFixed(2)} &#8363;</Text>
+            <Text style={styles.textNote}>Total Pay</Text>
+            <Text style={styles.textNote}>{parseFloat(total).toFixed(2)} &#8363;</Text>
           </BillRow>
         </Container>
         <TearLines

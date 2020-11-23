@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Form, Item, Picker, Icon } from 'native-base';
+import { Content, Form, Item, Picker, Icon } from 'native-base';
 export default class DropdownList extends Component {
     constructor(props) {
     super(props);
     this.state = {
-      selectedValue: undefined
+      selectedValue: 1
     };
   }
   onValueChange2(value) {
@@ -14,6 +14,7 @@ export default class DropdownList extends Component {
   }
   render() {
     const { placeholder, items } = this.props
+    debugger
     return (
       // <Container>
         // <Header />
@@ -30,7 +31,7 @@ export default class DropdownList extends Component {
                 selectedValue={this.state.selectedValue}
                 onValueChange={this.onValueChange2.bind(this)}
               >
-                {items.map(item => <Picker.Item label={item.name} value={item.name} key={item.id} />)}
+                {items.map(item => <Picker.Item label={item} value={item} key={item} />)}
               </Picker>
             </Item>
           </Form>

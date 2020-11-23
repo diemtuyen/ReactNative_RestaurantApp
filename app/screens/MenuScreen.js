@@ -113,6 +113,7 @@ MenuScreen.propTypes = {
 function initMapStateToProps(state) {
   return {
     restaurantList: state.restaurant.fullList,
+    foodList: state.restaurant.foodList
   };
 }
 

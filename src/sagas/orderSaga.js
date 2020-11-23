@@ -37,15 +37,18 @@ function* orderFetchTask(action) {
 }
 
 function* orderTask(action) {
+  const { payload } = action;
+  const userId = yield select(userIdSelector);
+  const result = {userId, items: payload.items, total: payload.total, table: payload.table}
   try {
-    const { payload } = action;
+    // const { payload } = action;
 
     const authToken = yield select(authTokenSelector);
-    const userId = yield select(userIdSelector);
-    const res = yield call(API.createOrder, userId, payload.items, payload.total, {
+    // const userId = yield select(userIdSelector);
+    const res = yield call(API.createOrder, userId, payload.items, payload.total, payload.table, {
       Authorization: `Bearer ${authToken}`,
     });
-
+    // const result = {userId, items: payload.items, total: payload.total, table: payload.table}
     if (res.status === 200) {
       yield put({
         type: 'CREATE_ORDER_SUCCESS',
@@ -55,15 +58,14 @@ function* orderTask(action) {
       yield put({
         type: 'CREATE_ORDER_ERROR',
         // payload: res.data,
-        payload: res.data,
+        payload: result,
       });
     }
   } catch (e) {
-    console.log(e);
     yield put({
       type: 'CREATE_ORDER_ERROR',
       // payload: e.data,
-      payload: e,
+      payload: result,
     });
   }
 }

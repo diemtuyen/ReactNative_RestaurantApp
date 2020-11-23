@@ -13,8 +13,10 @@ const ButtonText = styled(PrimaryText)`
 `;
 
 const ButtonWrap = styled.View`
-    padding: 15px 0;
+    padding: 10px;
     margin: 5px auto;
+    border: 1px solid grey;
+    border-radius: 4px;
     justify-content: flex-start;
     align-items: center;
     align-content: center;

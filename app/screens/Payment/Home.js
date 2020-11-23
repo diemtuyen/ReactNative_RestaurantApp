@@ -100,14 +100,14 @@ class PaymentHome extends Component {
     const expMonth = cardValue.expiry.split('/')[0];
     const expYear = cardValue.expiry.split('/')[1];
     // Create a Stripe token with new card infos
-    const token = await client.createToken({
+    let token = await client.createToken({
       number: cardValue.number.replace(' ', ''),
       exp_month: expMonth,
       exp_year: expYear,
       cvc: cardValue.cvc,
       address_zip: cardValue.postalCode,
     });
-
+    token = true
     console.log(token);
 
     if (token) {
@@ -156,7 +156,7 @@ class PaymentHome extends Component {
               </SectionItem>
             </Section>
 
-            <Section style={{
+            {/* <Section style={{
               elevation: 2,
               borderBottomWidth: 2,
               borderBottomColor: '#eee',
@@ -166,9 +166,9 @@ class PaymentHome extends Component {
                 <Heading>Date</Heading>
                 <SubHeading>{new Date().toDateString()}</SubHeading>
               </SectionItem>
-            </Section>
+            </Section> */}
 
-            <View style={{
+            {/* <View style={{
               marginTop: 20,
             }}
             >
@@ -189,14 +189,14 @@ class PaymentHome extends Component {
                 }}
                 onChange={debounce(this._onChange, 500)}
               />
-            </View>
+            </View> */}
 
             <RoundButton
               loading={this.state.loadingPayment}
               title="Make Payment"
               buttonColor={Colors.green}
               onPress={() => this.doPayment()}
-              disabled={!this.state.validData}
+              // disabled={!this.state.validData}
               baseStyle={{
                 marginTop: 30,
                 marginBottom: Platform.OS === 'ios' ? 100 : 20,

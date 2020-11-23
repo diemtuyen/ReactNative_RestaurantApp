@@ -12,6 +12,13 @@ import PrimaryText from '../base_components/PrimaryText';
 import RippleIcon from '../base_components/RippleIcon';
 import BR from '../base_components/BR';
 
+const tableList = [
+  {_id: 1, name: 'Bàn 1'},
+  {_id: 2, name: 'Bàn 2'},
+  {_id: 3, name: 'Bàn 3'},
+  {_id: 4, name: 'Bàn 4'}
+]
+
 class RestaurantList extends Component {
   handleFilter = (type) => {
     this.props.handleFilter(type);
@@ -98,6 +105,19 @@ class RestaurantList extends Component {
       : this.renderEmptySection()
   );
 
+  renderTableSection = () => (
+    (tableList && tableList.length > 0)
+      ?
+        <FlatList
+          data={tableList}
+          showsHorizontalScrollIndicator={false}
+          bounces={false}
+          // ListHeaderComponent={this.renderHeader}
+          renderItem={this.renderTableList}
+          keyExtractor={item => item._id}
+        />
+      : this.renderEmptySection()
+  );
 
   renderRestaurantList = ({ item: restaurant }) => {
     if (restaurant) {
@@ -117,9 +137,28 @@ class RestaurantList extends Component {
     return null;
   };
 
+  renderTableList = ({ item: table }) => {
+    if (table) {
+      return (
+        <RestaurantItem
+          restaurant={restaurant}
+          onPress={() => Actions.restaurantScreen({
+            title: startCase(restaurant.name),
+            backTitle: 'Back',
+            rightTitle: 'Sign Out',
+            onRight: () => this.handleSignOut(),
+            restaurant,
+          })}
+        />
+      );
+    }
+    return null;
+  };
+
   render() {
     return (
-      this.renderRestaurantSection()
+      // this.renderRestaurantSection()
+      this.renderTableSection()
     );
   }
 }
@@ -135,7 +174,7 @@ RestaurantList.defaultProps = {
 
 RestaurantList.propTypes = {
   hideFilter: PropTypes.bool,
-  restaurantList: PropTypes.array.isRequired,
+  // restaurantList: PropTypes.array.isRequired,
   handleFilter: PropTypes.func,
   onFilterIconPress: PropTypes.func,
 };

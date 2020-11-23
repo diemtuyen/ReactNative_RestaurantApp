@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { FlatList, Image, ScrollView, View } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 
 import AppBase from '../base_components/AppBase';
-import PrimaryText from '../base_components/PrimaryText';
 import { fetchRestaurant } from '../../src/actions/index';
-import SecondaryText from '../base_components/SecondaryText';
-import Assets from '../../src/constants/assets';
 import FoodItem from '../components/FoodItem';
-import ViewRow from '../base_components/ViewRow';
-import BR from '../base_components/BR';
 import { updateCartItems } from '../../src/actions/cart';
 import SignOutButton from '../components/RightHeaderButtons';
 
@@ -25,36 +20,13 @@ class RestaurantInfoScreen extends Component {
     this.props.fetchRestaurant();
   }
 
-  renderFoodList = (foods, details) => (
+  renderFoodList = (foods) => (
     <FlatList
       data={foods}
       bounces={false}
-      ListHeaderComponent={this.renderHeader(details)}
       keyExtractor={item => item._id}
       renderItem={this.renderFoodItem}
     />
-  );
-
-  renderHeader = (details) => (
-    <ViewRow
-      jc="space-between"
-      style={{
-        backgroundColor: '#fff',
-        borderColor: '#eee',
-        padding: 10,
-        borderBottomWidth: 1,
-        marginTop: 2,
-      }}
-    >
-      <PrimaryText
-        style={{
-          flex: 1,
-        }}
-        size={20}
-      >
-        {details}
-      </PrimaryText>
-    </ViewRow>
   );
 
   renderFoodItem = ({ item }) => {
@@ -62,7 +34,7 @@ class RestaurantInfoScreen extends Component {
       return (
         <FoodItem
           food={item}
-          onPress={() => this.props.updateCartItems(item, 1)}
+          onPress={(amount) => this.props.updateCartItems(item, amount, this.props.table._id)}
         />
       );
     }
@@ -70,7 +42,8 @@ class RestaurantInfoScreen extends Component {
   };
 
   render() {
-    const { restaurant: { name: restaurantName, details, foods } } = this.props;
+    const { foodList } = this.props;
+
     return (
       <AppBase
         style={{
@@ -79,25 +52,7 @@ class RestaurantInfoScreen extends Component {
         }}
       >
         <ScrollView>
-          {/* <Image
-            source={Assets.Images.placeholderRestaurant}
-            style={{
-              width: '100%',
-              height: 200,
-            }}
-            resizeMode="cover"
-          />
-          <View
-            style={{
-              backgroundColor: '#fff',
-              padding: 15,
-            }}
-          >
-            <PrimaryText align="left" size={24}>{restaurantName}</PrimaryText>
-            <BR size={5} />
-            <SecondaryText align="left" size={16}>{details}</SecondaryText>
-          </View> */}
-          {this.renderFoodList(foods, details)}
+          {this.renderFoodList(foodList)}
         </ScrollView>
       </AppBase>
     );
@@ -109,13 +64,12 @@ RestaurantInfoScreen.defaultProps = {};
 RestaurantInfoScreen.propTypes = {
   fetchRestaurant: PropTypes.func.isRequired,
   updateCartItems: PropTypes.func.isRequired,
-  // authLogout: PropTypes.func.isRequired,
-  restaurant: PropTypes.object.isRequired,
 };
 
 function initMapStateToProps(state) {
   return {
     restaurantList: state.restaurant.fullList,
+    foodList: state.restaurant.foodList
   };
 }
 
@@ -123,7 +77,6 @@ function initMapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchRestaurant,
     updateCartItems,
-    // authLogout,
   }, dispatch);
 }
 

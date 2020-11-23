@@ -1,5 +1,6 @@
 const initialState = {
   fullList: [],
+  foodList: [],
   restaurantInfo: null,
   error: null,
   cuisineRestaurants: [],
@@ -13,6 +14,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         fullList: payload,
+        foodList: payload,
         restaurantInfo: null,
         error: null,
       };
@@ -38,8 +40,16 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_RESTAURANT_TYPE_ERROR':
       return {
         ...state,
+        foodList: [
+          {_id: 1, food: {_id: 1, name: 'Hủ tíu thập cẩm', type: 'Tô lớn'}, price: 28 },
+          {_id: 2, food: {_id: 2, name: 'Hủ tíu xương', type: 'Tô lớn'}, price: 28 }, 
+          {_id: 3, food: {_id: 3, name: 'Hủ tíu tái', type: 'Tô lớn'}, price: 28 },
+          {_id: 4, food: {_id: 4, name: 'Hủ tíu khô thịt nướng', type: 'Tô lớn'}, price: 28 },
+          {_id: 5, food: {_id: 5, name: 'Hủ tíu khô tái', type: 'Tô lớn'}, price: 28 },
+          {_id: 6, food: {_id: 6, name: 'Hủ tíu khô xương', type: 'Tô lớn'}, price: 28 }
+        ],
         fullList: [
-          {_id:'0', name: 'Bún', details: 'Danh sách bún',
+          {_id:'0', name: 'Bàn số ...', details: 'Danh sách món ăn',
             foods: [              
               {_id: 1, food: {_id: 1, name: 'Bún thập cẩm', type: 'Tô lớn'}, price: 28 }, 
               {_id: 2, food: {_id: 2, name: 'Bún xương', type: 'Tô lớn'}, price: 28 }, 

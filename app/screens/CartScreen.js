@@ -15,6 +15,7 @@ import ViewRow from '../base_components/ViewRow';
 import PrimaryText from '../base_components/PrimaryText';
 import { deleteCartItem, fetchCartItems, updateCartItemQty } from '../../src/actions/cart';
 import { createOrder } from '../../src/actions';
+import { cleanCart } from '../../src/actions/cart';
 
 
 const FooterContainer = styled.View`
@@ -24,14 +25,6 @@ const FooterContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`;
-
-const AmountContainer = styled.View`
-  flex: 0.5;
-  align-items: center;
-  height: 100%;
-  background-color: #d9d9d9;
-  justify-content: center;
 `;
 
 const PayButton = styled.TouchableOpacity`
@@ -54,16 +47,7 @@ class CartScreen extends Component {
     this.props.fetchCartItems();
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    if (nextProps.createdOrder !== null) {
-      const { createdOrder } = nextProps;
-      Actions.paymentHome({
-        orderId: createdOrder._id,
-        totalAmount: createdOrder.totalCost,
-      });
-    }
-  }
-
+ 
   handleItemValueChange = (item, qty) => {
     if (qty === 0) {
       this.props.deleteCartItem(item._id);
@@ -74,15 +58,16 @@ class CartScreen extends Component {
 
   handlePayment = (totalAmount) => {
     const { cartData } = this.props;
-
     if (cartData.length > 0) {
+      const table = cartData[0].tableId
       const postData = cartData.map(item => ({
         id: item.food._id,
         quantity: item.qty,
         price: item.price,
       }));
 
-      this.props.createOrder(postData, totalAmount);
+      this.props.createOrder(postData, totalAmount, table);
+      this.props.cleanCart();
     }
   };
 
@@ -90,7 +75,7 @@ class CartScreen extends Component {
     <Item
       key={item._id}
       name={item.food.name}
-      price={`${item.price * item.qty} đ`}
+      price={`${item.price * item.qty}`}
       qty={item.qty}
       onChange={qty => this.handleItemValueChange(item, qty)}
     />
@@ -144,11 +129,14 @@ class CartScreen extends Component {
     if (cartData.length > 0) {
       return (
         <FooterContainer>
-          <AmountContainer>
-            <PrimaryText>{totalAmount} &#8363;</PrimaryText>
-          </AmountContainer>
           <PayButton
-            onPress={() => this.handlePayment(totalAmount)}
+            onPress={() => {
+              this.handlePayment(totalAmount);
+              Actions.drawerClose();
+              Actions.pop();
+              Actions.pop();
+            }
+            }
           >
             <FooterText>
               Proceed To Pay
@@ -167,30 +155,13 @@ class CartScreen extends Component {
       (total, item) => total + (item.price * item.qty),
       0,
     ));
-    const taxPercent = 8;
-
-    const tax = +(totalBill * (taxPercent / 100)).toFixed(2);
 
     const billInfo = [
       {
         name: 'Items Total',
         total: totalBill,
       },
-      {
-        name: 'Offer Discount',
-        total: -18,
-      },
-      {
-        name: `Taxes (${taxPercent}%)`,
-        total: tax,
-      },
-      {
-        name: 'Delivery Charges',
-        total: 30,
-      },
     ];
-
-    totalBill += (tax + 30) - 18;
 
     return (
       <AppBase
@@ -237,6 +208,7 @@ function initMapDispatchToProps(dipatch) {
     deleteCartItem,
     fetchCartItems,
     updateCartItemQty,
+    cleanCart,
     createOrder,
   }, dipatch);
 }

@@ -10,9 +10,10 @@ function getOrders(userId, headers) {
   });
 }
 
-function createOrder(userId, cartItems, totalAmount, headers) {
+function createOrder(userId, cartItems, totalAmount, table, headers) {
   const data = {
     userId,
+    table,
     items: cartItems,
     totalCost: totalAmount,
   };

@@ -4,15 +4,10 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { ScrollView } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import startCase from 'lodash/startCase';
-
 import SignOutButton from '../components/RightHeaderButtons';
 import AppBase from '../base_components/AppBase';
-import CuisineGrid from '../components/CuisineGrid';
 import PrimaryText from '../base_components/PrimaryText';
-import RestaurantList from '../components/RestaurantList';
-import FilterRadioModal from '../components/FilterRadioModal';
+import TableList from '../components/TableList';
 import { fetchCuisineTypes, fetchRestaurant, fetchRestaurantByType } from '../../src/actions/index';
 
 class HomeScreen extends Component {
@@ -23,7 +18,6 @@ class HomeScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.filterModalRef = React.createRef();
   }
 
   componentDidMount() {
@@ -45,47 +39,27 @@ class HomeScreen extends Component {
     }
   };
 
-  openCuisineScreen = (value) => {
-    Actions.cuisineRestaurants({
-      cuisineType: value,
-      backTitle: 'Back',
-      title: startCase(value),
-      rightTitle: 'Sign Out',
-      onRight: () => this.handleSignOut(),
-    });
-  };
-
   render() {
-    const filterData = this.props.cuisineTypes.map(type => ({
-      value: type,
-      label: startCase(type),
-    }));
+
+    const tableList = [
+      {_id: 1, name: 'Bàn 1', status: 'free', statusName: 'Bàn trống'},
+      {_id: 2, name: 'Bàn 2', status: 'serve', statusName: 'Bàn đang phục vụ'},
+      {_id: 3, name: 'Bàn 3', status: 'bill', statusName: 'Bàn chờ tính tiền'},
+      {_id: 4, name: 'Bàn 4', status: 'free', statusName: 'Bàn trống'},
+      {_id: 5, name: 'Bàn 5', status: 'free', statusName: 'Bàn trống'},
+      {_id: 6, name: 'Bàn 6', status: 'free', statusName: 'Bàn trống'}
+    ]
 
     return (
       <AppBase style={{
         alignItems: 'stretch',
         backgroundColor: '#fff',
       }}
-      >
-        {
-          filterData.length > 0 &&
-          <FilterRadioModal
-            heading="Cuisine Type"
-            data={filterData}
-            // eslint-disable-next-line no-return-assign
-            pRef={el => (this.filterModalRef = el)}
-            close={() => this.filterModalRef.close()}
-            onClose={this.handleFilter}
-          />
-        }
+      >  
         <ScrollView>
-          <CuisineGrid
-            data={this.props.cuisineTypes}
-            onPress={this.openCuisineScreen}
-          />
-          <RestaurantList
-            onFilterIconPress={() => this.filterModalRef.open()}
-            restaurantList={this.props.restaurantList}
+          <TableList
+            tableList={tableList}
+            foodList={this.props.foodList}
           />
         </ScrollView>
       </AppBase>
@@ -102,7 +76,6 @@ HomeScreen.propTypes = {
   fetchRestaurant: PropTypes.func.isRequired,
   fetchRestaurantByType: PropTypes.func.isRequired,
   fetchCuisineTypes: PropTypes.func.isRequired,
-  // fetchCartItems: PropTypes.func.isRequired,
   restaurantList: PropTypes.array,
   cuisineTypes: PropTypes.array,
 };
@@ -111,6 +84,7 @@ function initMapStateToProps(state) {
   return {
     cuisineTypes: state.food.cuisineTypes,
     restaurantList: state.restaurant.fullList,
+    foodList: state.restaurant.foodList
   };
 }
 
@@ -119,7 +93,6 @@ function initMapDispatchToProps(dispatch) {
     fetchRestaurant,
     fetchRestaurantByType,
     fetchCuisineTypes,
-    // fetchCartItems,
   }, dispatch);
 }
 

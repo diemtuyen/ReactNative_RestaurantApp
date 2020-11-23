@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-
 import CounterButton from './CounterButton';
-import PrimaryText from '../../base_components/PrimaryText';
+import { Text } from 'react-native';
 
 const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  padding: 20px 10px;
+  padding: 10px 5px;
 `;
 
 const NameView = styled.View`
@@ -37,12 +35,12 @@ const Item = ({
 }) => (
   <Container>
     <NameView>
-      <PrimaryText size={14} align="left">{name}</PrimaryText>
+      <Text size={14} align="left">{name}</Text>
     </NameView>
     <RightSection>
       <CounterButton onChange={onChange} qty={qty} />
-      <PriceText>{price}</PriceText>
-    </RightSection>
+      {price && <PriceText>{price}</PriceText>}
+    </RightSection>    
   </Container>
 );
 
@@ -50,7 +48,7 @@ Item.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,
-  qty: PropTypes.number.isRequired,
+  // qty: PropTypes.number.isRequired,
 };
 
 

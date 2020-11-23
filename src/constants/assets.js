@@ -1,6 +1,7 @@
 export default {
   Images: {
     placeholderRestaurant: require('../../assets/images/placeholder-res.png'),
+    placeholderTable: require('../../assets/images/placeholder-table.png'),
     placeholderFood: require('../../assets/images/placeholder-food.png'),
     chinese: require('../../assets/images/chinese.png'),
     'south-indian': require('../../assets/images/south-indian.png'),

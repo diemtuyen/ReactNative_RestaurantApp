@@ -87,7 +87,7 @@ class RestaurantList extends Component {
         <RestaurantItem
           restaurant={restaurant}
           onPress={() => Actions.restaurantScreen({
-            title: startCase(`Bàn ${restaurant._id}`),
+            title: startCase(`Bàn số ${restaurant._id}`),
             backTitle: 'Back',
             rightTitle: 'Sign Out',
             onRight: () => this.handleSignOut(),

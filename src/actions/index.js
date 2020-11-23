@@ -44,11 +44,12 @@ export const doCancelOrder = () => ({
   type: 'CANCEL_ORDER',
 });
 
-export const createOrder = (items, total) => ({
+export const createOrder = (items, total, table) => ({
   type: 'CREATE_ORDER',
   payload: {
     items,
     total,
+    table
   },
 });
 
