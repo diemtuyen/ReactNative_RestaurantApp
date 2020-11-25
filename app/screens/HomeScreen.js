@@ -42,12 +42,12 @@ class HomeScreen extends Component {
   render() {
 
     const tableList = [
-      {_id: 1, name: 'Bàn 1', status: 'free', statusName: 'Bàn trống'},
-      {_id: 2, name: 'Bàn 2', status: 'serve', statusName: 'Bàn đang phục vụ'},
-      {_id: 3, name: 'Bàn 3', status: 'bill', statusName: 'Bàn chờ tính tiền'},
-      {_id: 4, name: 'Bàn 4', status: 'free', statusName: 'Bàn trống'},
-      {_id: 5, name: 'Bàn 5', status: 'free', statusName: 'Bàn trống'},
-      {_id: 6, name: 'Bàn 6', status: 'free', statusName: 'Bàn trống'}
+      {_id: 1, name: 'Bàn 1', status: 'free', statusName: 'Order'},
+      {_id: 2, name: 'Bàn 2', status: 'serve', statusName: 'Served'},
+      {_id: 3, name: 'Bàn 3', status: 'bill', statusName: 'Billing'},
+      {_id: 4, name: 'Bàn 4', status: 'free', statusName: 'Order'},
+      {_id: 5, name: 'Bàn 5', status: 'free', statusName: 'Order'},
+      {_id: 6, name: 'Bàn 6', status: 'free', statusName: 'Order'}
     ]
 
     return (

@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import PrimaryText from '../base_components/PrimaryText';
 import SecondaryText from '../base_components/SecondaryText';
@@ -13,14 +13,15 @@ const TableItem = ({ table, onPress }) => (
     <View
       key={table._id}
       style={{
-        flex: 1/2,
+        // flex: 1/2,
         elevation: 3,
         minHeight: 100,
         backgroundColor: `${table.status === 'free' ? '#fff' : table.status === 'serve' ? '#17a2b8' : '#ffc107'}`,
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'stretch',
+        // justifyContent: 'space-around',
+        // alignItems: 'stretch',
         margin: 15,
+        padding:15,
         borderRadius: 5,
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
@@ -29,9 +30,9 @@ const TableItem = ({ table, onPress }) => (
       <PrimaryText size={20} align="center" style={{ marginBottom: 0 }}>
         {table.name}
       </PrimaryText>
-      <SecondaryText size={20} align="center" >
+      <Text size={20} align="center" >
         {table.statusName}
-      </SecondaryText>
+      </Text>
     </View>
   </TouchableOpacity>
 );

@@ -5,6 +5,8 @@ BoilerPlate Used React Native [https://github.com/kaushiknishchay/React-Native-B
 
 BoilerPlate Used React.JS [https://github.com/Codebrahma/Codebrahma-React-Boilerplate](https://github.com/Codebrahma/Codebrahma-React-Boilerplate)
 
+## Icon
+    https://ionicframework.com/docs/v3/ionicons/
 ## Setup
 
 ## Prerequisites

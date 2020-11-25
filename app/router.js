@@ -106,6 +106,16 @@ const AppRouter = () => (
           <Scene
             key="showAllOrders"
             component={OrdersList}
+            navigationBarStyle={{
+              backgroundColor: '#fff',
+              elevation: 2,
+              borderBottomWidth: 1,
+              borderBottomColor: '#eee',
+            }}
+            titleStyle={{
+              fontFamily: 'Roboto Slab',
+              color: Colors.primaryColor,
+            }}
             title="My Orders"
           />
         </Scene>

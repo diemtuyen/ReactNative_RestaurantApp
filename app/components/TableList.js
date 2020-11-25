@@ -14,54 +14,15 @@ class TableList extends Component {
     this.props.handleFilter(type);
   };
 
- 
-  renderEmptySection = () => {
-    if (!this.props.tableList || this.props.tableList.length === 0) {
-      return (
-        <View>
-          <View
-            style={{
-              backgroundColor: '#fdfdfd',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: 20,
-              flexDirection: 'column',
-            }}
-          >
-            <Image
-              source={Assets.Images.banana}
-              style={{
-                width: 150,
-                height: 150,
-              }}
-            />
-            <BR />
-            <PrimaryText>
-              {'We couldn\'t find anything.'}
-            </PrimaryText>
-            <BR />
-            <PrimaryText>
-              Please try again...
-            </PrimaryText>
-          </View>
-        </View>
-      );
-    }
-    return null;
-  };
-
   renderTableSection = () => (
-    (this.props.tableList && this.props.tableList.length > 0)
-      ?
-        <FlatList
-          data={this.props.tableList}
-          numColumns={2}
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-          renderItem={this.renderTableList}
-          keyExtractor={item => item._id}
-        />
-      : this.renderEmptySection()
+    <FlatList
+      data={this.props.tableList}
+      numColumns={3}
+      showsHorizontalScrollIndicator={false}
+      bounces={false}
+      renderItem={this.renderTableList}
+      keyExtractor={item => item._id}
+    />
   );
 
   renderTableList = ({ item: table }) => {
