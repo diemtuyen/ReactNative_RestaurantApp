@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: colors.white,
   },
+  textNote: {
+    color: colors.primaryColor
+  },
   divider: {
     margin: '1%',
   },
@@ -142,14 +145,13 @@ class OrdersList extends React.Component {
           Order #{order.item._id} for table {order.item.table} - $ {order.item.total}
         </PrimaryText>
         {order.item.items[0].map(this.renderDetailOrder)}
-        <FlatButton
-          key="cancel"
-          title="Hủy"
-        />
-        <FlatButton
-          key="confirm"
-          title="Xác nhận"
-        />
+        <View style={{
+            flexDirection: 'column',
+            flex: 1
+          }}>
+          <Text style={styles.textNote}>Hủy</Text>
+          <Text style={styles.textNote}>Xác nhận</Text>
+        </View>
       </View>
     )
   };
