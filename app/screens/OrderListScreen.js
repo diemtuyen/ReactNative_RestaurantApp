@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   textNote: {
-    color: colors.primaryColor
+    color: colors.primaryColor,
+    borderColor: 'grey',
+    borderWidth: 1
   },
   divider: {
     margin: '1%',
@@ -146,11 +148,21 @@ class OrdersList extends React.Component {
         </PrimaryText>
         {order.item.items[0].map(this.renderDetailOrder)}
         <View style={{
-            flexDirection: 'column',
-            flex: 1
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            flex: 1,
+            backgroundColor: 'white'
           }}>
-          <Text style={styles.textNote}>Hủy</Text>
-          <Text style={styles.textNote}>Xác nhận</Text>
+          <FlatButton
+            key="cancel"
+            title="Hủy"
+            // onPress={onPress(this.state.amount)}
+          />
+          <FlatButton
+            key="confirm"
+            title="Xác nhận"
+            // onPress={onPress(this.state.amount)}
+          />
         </View>
       </View>
     )

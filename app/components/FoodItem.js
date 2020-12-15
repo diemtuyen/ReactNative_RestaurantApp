@@ -50,14 +50,14 @@ class FoodItem extends React.Component {
             alignItems: 'stretch',
           }}
         >
-          <Image
+          {/* <Image
             source={Assets.Images.placeholderFood}
             style={{
               width: '100%',
               height: 100,
             }}
             resizeMode="contain"
-          />
+          /> */}
           <ViewRow
             jc="space-between"
             ai="flex-start"
@@ -69,7 +69,7 @@ class FoodItem extends React.Component {
             <View
               style={{
                 flex: 3,
-                flexDirection: 'column',
+                flexDirection: 'column'
               }}
             >
               <Text size={24} style={{ marginBottom: 10 }}>

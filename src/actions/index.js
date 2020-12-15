@@ -28,6 +28,10 @@ export const fetchRestaurant = (id = null) => ({
   },
 });
 
+export const fetchTables = () => ({
+  type: 'FETCH_TABLE'
+})
+
 export const fetchRestaurantByType = (type = null, isFromCuisine = false) => ({
   type: 'FETCH_RESTAURANT_TYPE',
   payload: {
